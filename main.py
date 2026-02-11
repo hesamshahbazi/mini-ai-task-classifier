@@ -14,11 +14,17 @@ def classify_task(task):
 def main():
     print("Mini AI Task Classifier")
     print("-----------------------")
+    print("Type 'exit' to quit.\n")
 
-    task = input("Enter a task description: ")
-    category = classify_task(task)
+    while True:
+        task = input("Enter a task description: ")
 
-    print(f"Task category: {category}")
+        if task.lower() == "exit":
+            print("Exiting program...")
+            break
+
+        category = classify_task(task)
+        print(f"Task category: {category}\n")
 
 
 if __name__ == "__main__":
