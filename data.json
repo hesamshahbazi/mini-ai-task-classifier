@@ -1,0 +1,15 @@
+{
+  "labels": ["Support", "Sales", "Finance", "Management", "General"],
+  "training": [
+    {"text": "refund request", "label": "Support"},
+    {"text": "customer complaint about product", "label": "Support"},
+    {"text": "invoice payment failed", "label": "Finance"},
+    {"text": "send invoice to client", "label": "Finance"},
+    {"text": "schedule meeting with team", "label": "Management"},
+    {"text": "project deadline planning", "label": "Management"},
+    {"text": "pricing for enterprise plan", "label": "Sales"},
+    {"text": "demo request", "label": "Sales"},
+    {"text": "hello", "label": "General"},
+    {"text": "just checking in", "label": "General"}
+  ]
+}

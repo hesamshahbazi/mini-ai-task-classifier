@@ -1,10 +1,13 @@
 from classifier import classify_task
+from ml_classifier import MLTaskClassifier
 
 
 def main() -> None:
     print("Mini AI Task Classifier")
-    print("-----------------------")
+    print("------------------------")
     print("Type 'exit' to quit.\n")
+
+    clf = MLTaskClassifier()   
 
     while True:
         task = input("Enter a task description: ").strip()
@@ -17,7 +20,7 @@ def main() -> None:
             print("Please enter a non-empty task.\n")
             continue
 
-        category = classify_task(task)
+        category = clf.predict(task)
         print(f"Task category: {category}\n")
 
 
