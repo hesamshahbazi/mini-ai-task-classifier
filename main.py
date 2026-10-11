@@ -1,4 +1,3 @@
-from classifier import classify_task
 from ml_classifier import MLTaskClassifier
 
 

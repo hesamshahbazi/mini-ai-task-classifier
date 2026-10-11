@@ -1,5 +1,6 @@
 import json
 import os
+from pathlib import Path
 import joblib
 
 from sklearn.feature_extraction.text import CountVectorizer
@@ -7,8 +8,9 @@ from sklearn.naive_bayes import MultinomialNB
 
 
 class MLTaskClassifier:
-    def __init__(self) -> None:
-        self.model_path = "model.pkl"
+    def __init__(self, model_path=None) -> None:
+        self.base_dir = Path(__file__).resolve().parent
+        self.model_path = Path(model_path) if model_path is not None else self.base_dir / "model.pkl"
         self.vectorizer = CountVectorizer()
         self.model = MultinomialNB()
 
@@ -29,7 +31,7 @@ class MLTaskClassifier:
         self.vectorizer, self.model = joblib.load(self.model_path)
 
     def _load_data(self):
-        with open("data.json", "r", encoding="utf-8") as f:
+        with open(self.base_dir / "data.json", "r", encoding="utf-8") as f:
             data = json.load(f)
 
         texts = [item["text"] for item in data["training"]]
@@ -37,5 +39,7 @@ class MLTaskClassifier:
         return texts, labels
 
     def predict(self, text: str) -> str:
-        X = self.vectorizer.transform([text])
+        if not isinstance(text, str) or not text.strip():
+            raise ValueError("Text must not be blank")
+        X = self.vectorizer.transform([text.strip()])
         return self.model.predict(X)[0]

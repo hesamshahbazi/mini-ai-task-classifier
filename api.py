@@ -1,5 +1,6 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel, StringConstraints
+from typing import Annotated
 
 from ml_classifier import MLTaskClassifier
 
@@ -9,7 +10,7 @@ clf = MLTaskClassifier()
 
 
 class TaskRequest(BaseModel):
-    text: str
+    text: Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=10000)]
 
 
 @app.get("/health")
